@@ -1,22 +1,16 @@
-export interface ProductsState {
-    products: [];
-}
 export enum ProductsActionTypes {
      ADD_PRODUCT = 'ADD_PRODUCT',
      DELETE_PRODUCT = 'DELETE_PRODUCT',
 
 }
 
+export interface Product {
+    name: string;
+    price: number;
+}
+
 export interface Products {
-    cheese: number;
-    sausage: number;
-    cottageCheese: number;
-    chicken: number;
-    turkey: number;
-    beef: number;
-    pork: number;
-    eggs: number;
-    shampoo: number;
+    [key: string]: Product;
 }
 
 interface AddProductAction {
