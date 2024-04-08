@@ -2,6 +2,8 @@ import "./App.css";
 import { Product, ProductsActionTypes } from "./types/products.ts";
 import { useDispatch, useSelector } from "react-redux";
 import {useState} from "react";
+import ProductList from "./components/ProductList.tsx";
+import PopUp from "./components/PopUp.tsx";
 
 const App = () => {
     const shoppingCart: Product[] = useSelector((state: { products: Product[] }) => state.products);
@@ -24,12 +26,15 @@ const App = () => {
         dispatch({ type: ProductsActionTypes.ADD_PRODUCT, payload: product })
     }
 
-    const totalPrice = () => shoppingCart.reduce()
+    const totalPrice = shoppingCart.reduce((total, product) => product.price + total, 0)
 
     return (
         <div className='App'>
             <div className="header">
-                <button className='cart'>Корзина: {totalPrice()}$ - {numOfProducts()}</button>
+                <button
+                    onClick={() => setVisible(!visible)}
+                    className='cart'>
+                    Корзина: {totalPrice}$ - {shoppingCart.length}</button>
             </div>
             <div className="main">
                 <div className='products'>
@@ -43,13 +48,8 @@ const App = () => {
                         </button>
                     ))}
                 </div>
-                <div style={{display: visible ? 'block' : 'none'}}>
-                    {shoppingCart.map((product, index) => (
-                        <div key={index}>
-                            {product.name}: {product.price}$
-                        </div>
-                    ))}
-                </div>
+                <ProductList/>
+                <PopUp visible={visible}/>
             </div>
         </div>
     );

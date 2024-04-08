@@ -32,3 +32,10 @@ button {
 button:hover {
     background-color: lightblue;
 }
+
+.pop-up {
+    position: absolute;
+    top: 60%;
+    left: 80%;
+    border: 1px solid green;
+}
